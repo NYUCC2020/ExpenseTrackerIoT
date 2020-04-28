@@ -1,6 +1,10 @@
 # ExpenseTrackerIoT
 IoT feature for Expense Tracker App
 
+## MQTT Endpoint(Deployed to IBM K8s)
+- HOST = '184.173.52.86'
+- PORT = 30002
+
 ## Run with Docker
 ```
 cd ExpenseTrackerIoT

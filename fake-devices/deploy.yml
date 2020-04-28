@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: expense-tracker-iot-fake-device
+  labels:
+    app: expense-tracker-iot-fake-device
+spec:
+  containers:
+  - name: expense-tracker-iot-fake-device
+    image: us.icr.io/nyu-cc/expense-tracker-iot-fake-device:latest
+    env:
+    - name: HOST
+      value: "184.173.52.86"
+    - name: PORT
+      value: "30002"
+    - name: TOPIC
+      value: "home_device"
+    - name: DEVICE_ID
+      value: "0"
+    - name: INTERVAL
+      value: "3600"

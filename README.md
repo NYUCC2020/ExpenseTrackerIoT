@@ -34,4 +34,4 @@ mosquitto_pub -h localhost \
 ```
 
 ## More examples
-See scripts under **fake-device** foler
+See scripts under **fake-devices** foler

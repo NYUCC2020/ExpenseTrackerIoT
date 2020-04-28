@@ -33,10 +33,11 @@ URL = 'mongodb://project2:123789@expensetracker-shard-00-00-gnxoz.mongodb.net:27
 DATABASE_URI = os.getenv('DATABASE_URI', URL)
 TOPIC = os.getenv('TOPIC', 'home_device')
 HOST = os.getenv('HOST', 'localhost')
+PORT = os.getenv('PORT', 1883)
 
 logger = logging.getLogger("IoT message subscriber logger") 
 
-def subscribe(topic, host='localhost', port=1883):
+def subscribe(topic, host, port):
     def on_connect(client, userdata, flags, rc):
         logger.info("Connected with result code {}".format(str(rc)))
         client.subscribe(topic)
@@ -77,4 +78,4 @@ if __name__ == '__main__':
     logger.info(90 * '*')
     
     connect_DB()
-    subscribe(TOPIC, host=HOST)
+    subscribe(TOPIC, host=HOST, port=PORT)

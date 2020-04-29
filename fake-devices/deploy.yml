@@ -15,7 +15,9 @@ spec:
       value: "30002"
     - name: TOPIC
       value: "home_device"
-    - name: DEVICE_ID
-      value: "0"
+    - name: USER_NAME
+      value: "Zelong"
+    - name: DEVICE_NAME
+      value: "bedroom-bulb"
     - name: INTERVAL
       value: "3600"

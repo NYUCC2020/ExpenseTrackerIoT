@@ -16,8 +16,9 @@ logging.basicConfig(
 HOST = os.getenv('HOST', 'localhost')
 PORT = int(os.getenv('PORT', 1883))
 TOPIC = os.getenv('TOPIC', "home_device")
-DEVICE_ID = os.getenv('DEVICE_ID', "0")
-INTERVAL = int(os.getenv('INTERVAL', 60*60))
+USER_NAME = os.getenv('USER_NAME', "Zelong")
+DEVICE_NAME = os.getenv('DEVICE_NAME', "bedroom-bulb")
+INTERVAL = int(os.getenv('INTERVAL', 10))
 
 # This is a simple ON/OFF event the Publisher
 client = mqtt.Client()
@@ -26,10 +27,10 @@ client.connect(HOST, PORT, 60)
 actions = ["ON", "OFF"]
 cur_action = 0
 while True:
-    message = json.dumps({"action_timestamp": time.time(), "action": actions[cur_action], "device_id": DEVICE_ID})
+    message = json.dumps({"userName": USER_NAME, "actionTimestamp": time.time(), "action": actions[cur_action], "deviceName": DEVICE_NAME})
     client.publish(TOPIC, message)
     cur_action = (cur_action+1) % 2
-    logger.info('Device {} sent message {} to topic {} on {}:{}. Send next message after {} second(s)'.format(DEVICE_ID, message, TOPIC, HOST, PORT, INTERVAL))
+    logger.info("User {}'s Device {} sent message {} to topic {} on {}:{}. Send next message after {} second(s)".format(USER_NAME, DEVICE_NAME, message, TOPIC, HOST, PORT, INTERVAL))
     time.sleep(INTERVAL)
 
 client.disconnect()

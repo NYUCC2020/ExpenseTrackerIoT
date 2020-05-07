@@ -16,7 +16,7 @@ logging.basicConfig(
 HOST = os.getenv('HOST', 'localhost')
 PORT = int(os.getenv('PORT', 1883))
 TOPIC = os.getenv('TOPIC', "home_device")
-USER_NAME = os.getenv('USER_NAME', "Zelong")
+USER_ID = os.getenv('USER_ID', "5eaa1b64930b9f6cfc0d3037")
 DEVICE_NAME = os.getenv('DEVICE_NAME', "bedroom-bulb")
 INTERVAL = int(os.getenv('INTERVAL', 10))
 
@@ -27,10 +27,10 @@ client.connect(HOST, PORT, 60)
 actions = ["ON", "OFF"]
 cur_action = 0
 while True:
-    message = json.dumps({"userName": USER_NAME, "actionTimestamp": time.time(), "action": actions[cur_action], "deviceName": DEVICE_NAME})
+    message = json.dumps({"userId": USER_ID, "actionTimestamp": time.time(), "action": actions[cur_action], "deviceName": DEVICE_NAME})
     client.publish(TOPIC, message)
     cur_action = (cur_action+1) % 2
-    logger.info("User {}'s Device {} sent message {} to topic {} on {}:{}. Send next message after {} second(s)".format(USER_NAME, DEVICE_NAME, message, TOPIC, HOST, PORT, INTERVAL))
+    logger.info("User {}'s Device {} sent message {} to topic {} on {}:{}. Send next message after {} second(s)".format(USER_ID, DEVICE_NAME, message, TOPIC, HOST, PORT, INTERVAL))
     time.sleep(INTERVAL)
 
 client.disconnect()

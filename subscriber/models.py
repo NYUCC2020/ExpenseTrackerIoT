@@ -29,7 +29,7 @@ import logging
 from requests import HTTPError, ConnectionError
 
 from pymongo import MongoClient
-
+from bson.objectid import ObjectId
 
 class DatabaseConnectionError(Exception):
     """ Custom Exception when database connection fails """
@@ -46,7 +46,7 @@ class Message():
         """ Constructor """
         msg_dict = json.loads(message)
         try:
-            self.userId = msg_dict['userId']
+            self.userId = ObjectId(msg_dict['userId'])
             self.deviceName = msg_dict['deviceName']
             self.action = msg_dict['action']
             self.actionTimestamp = msg_dict['actionTimestamp']
@@ -60,7 +60,7 @@ class Message():
         criteria = {'userId': self.userId, 'deviceName': self.deviceName}
         try:
             if self.collection.find(criteria).count() == 0:
-                self.logger.error('Device(ID: {}) does not exist'.format(self.deviceName))
+                self.logger.error('Device(Name: {}) does not exist'.format(self.deviceName))
             else:
                 device = self.collection.find_one(criteria)
                 if device['status'] != self.action:

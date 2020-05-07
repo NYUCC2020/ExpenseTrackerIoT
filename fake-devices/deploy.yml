@@ -21,4 +21,4 @@ spec:
     - name: DEVICE_NAME
       value: "bedroom-bulb"
     - name: INTERVAL
-      value: "10"
+      value: "3600"

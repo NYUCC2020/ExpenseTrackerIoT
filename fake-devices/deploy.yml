@@ -8,6 +8,7 @@ spec:
   containers:
   - name: expense-tracker-iot-fake-device
     image: us.icr.io/nyu-cc/expense-tracker-iot-fake-device:latest
+    imagePullPolicy: Always
     env:
     - name: HOST
       value: "184.173.52.86"

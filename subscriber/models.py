@@ -46,7 +46,7 @@ class Message():
         """ Constructor """
         msg_dict = json.loads(message)
         try:
-            self.userName = msg_dict['userName']
+            self.userId = msg_dict['userId']
             self.deviceName = msg_dict['deviceName']
             self.action = msg_dict['action']
             self.actionTimestamp = msg_dict['actionTimestamp']
@@ -57,7 +57,7 @@ class Message():
         """
         Update device status record in the Database
         """
-        criteria = {'userName': self.userName, 'deviceName': self.deviceName}
+        criteria = {'userId': self.userId, 'deviceName': self.deviceName}
         try:
             if self.collection.find(criteria).count() == 0:
                 self.logger.error('Device(ID: {}) does not exist'.format(self.deviceName))
